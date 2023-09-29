@@ -1,0 +1,8 @@
+add-trailing-comma
+autopep8
+isort
+pylint
+pylint-junit
+pynvim
+pytest
+pytest-cov

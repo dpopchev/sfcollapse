@@ -1,0 +1,5 @@
+.coverage
+__pycache__
+sfcollapse.egg-info
+.stamps
+.venv
