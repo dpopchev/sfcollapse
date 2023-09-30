@@ -14,6 +14,17 @@ make install-nrpy
 make setup-sfcollapse # see build
 ```
 
+`venv` server
+```
+make run-jupyter
+```
+
+
+`venv` interpreter
+```
+make run-ipython
+```
+
 ## Usage
 
 ### General remark
