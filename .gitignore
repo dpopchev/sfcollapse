@@ -5,3 +5,4 @@ __pycache__
 sfcollapse.egg-info
 .stamps
 .venv
+.ipynb_checkpoints/
