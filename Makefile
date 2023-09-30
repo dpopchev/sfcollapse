@@ -471,7 +471,7 @@ $(sfcollapse_headers_dst): $(sfcollapse_build)/%: $(nrpy_modules_dir)/% | $(sfco
 	@$(call log,'make symbolic link headers for $(notdir $<)',$(done))
 
 .PHONY: setup-sfcollapse
-setup-sfcollapse: $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_headers_dst)
+setup-sfcollapse: install-nrpy $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_headers_dst)
 
 .PHONY: clean-sfcollapse
 clean-sfcollapse:
