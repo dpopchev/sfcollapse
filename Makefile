@@ -452,9 +452,6 @@ $(build_dir):
 	@$(call add_gitignore,$@)
 	@$(call log,'make $@ dir',$(done))
 
-.PHONY: setup-sfcollapse
-setup-sfcollapse: $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_headers_dst)
-
 sfcollapse_build := $(build_dir)/sfcollapse
 $(sfcollapse_build): | $(build_dir)
 	@mkdir $@
@@ -475,6 +472,9 @@ $(sfcollapse_headers_dst): $(sfcollapse_build)/%: $(nrpy_modules_dir)/% | $(sfco
 	@mkdir -p $(dir $@)
 	@ln -s $(abspath $<) $@
 	@$(call log,'make symbolic link headers for $(notdir $<)',$(done))
+
+.PHONY: setup-sfcollapse
+setup-sfcollapse: $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_headers_dst)
 
 .PHONY: clean-sfcollapse
 clean-sfcollapse:
