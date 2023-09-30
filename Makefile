@@ -422,7 +422,11 @@ clean-TAGS:
 python_version := $(shell $(python) --version 2> /dev/null | grep -Po '\d+.\d+')
 venv_packages := $(venv)/lib/python$(python_version)/site-packages
 nrpy_modules_dir := ../nrpytutorial-ET_2022_11_v0
-nrpy_modules_names := outputC.py
+nrpy_modules_names := outputC.py loop.py NRPy_param_funcs.py SIMD.py expr_tree.py
+nrpy_modules_names += cse_helpers.py finite_difference.py grid.py
+nrpy_modules_names += finite_difference_helpers.py indexedexp.py
+nrpy_modules_names += functional.py reference_metric.py cmdline_helper.py
+nrpy_modules_names += MoLtimestepping ScalarField BSSN CurviBoundaryConditions
 venv_nrpy_modules_dst := $(addprefix $(venv_packages)/,$(nrpy_modules_names))
 
 .PHONY: install-nrpy ### install nrpy from <nrpy_modules_dir>; counterpart is clean

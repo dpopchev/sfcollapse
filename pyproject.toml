@@ -5,5 +5,5 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sfcollapse"
 version = "0.0.1"
-requires-python = ">=3.7"
-dependencies = []
+requires-python = ">=3.8"
+dependencies = ['sympy', 'numpy', 'scipy', 'matplotlib', 'matplotlib_inline']

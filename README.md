@@ -10,4 +10,5 @@ TAG=ET_2022_11_v0; git clone --depth=1 --branch=${TAG} https://github.com/zachet
 git clone URL
 cd sfcollapse
 pyseed=/path/python3.10.x make development
+make install-nrpy
 ```
