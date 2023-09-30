@@ -419,6 +419,30 @@ clean-TAGS:
 	@$(call del_gitignore,tags)
 	@$(call log,'cleaning tags file',$(done))
 
+python_version := $(shell $(python) --version 2> /dev/null | grep -Po '\d+.\d+')
+venv_packages := $(venv)/lib/python$(python_version)/site-packages
+nrpy_modules_dir := ../nrpytutorial-ET_2022_11_v0
+nrpy_modules_names := outputC.py
+venv_nrpy_modules_dst := $(addprefix $(venv_packages)/,$(nrpy_modules_names))
+
+.PHONY: install-nrpy ### install nrpy from <nrpy_modules_dir>; counterpart is clean
+install-nrpy: setup $(venv_nrpy_modules_dst)
+
+$(venv_nrpy_modules_dst): $(venv_packages)/%: $(nrpy_modules_dir)/%
+	@if [[ ! -e $< ]]; then \
+		echo 'Not found nrpy module $<'; \
+		exit 2; \
+	fi
+	@ln -s $(abspath ./$<) $@
+	@$(call log,'install nrpy: $(notdir $<)',$(done))
+
+
+.PHONY: clean-nrpy
+clean-nrpy:
+	@rm --force $(venv_nrpy_modules_dst)
+	@$(call log,'clean nrpy modules from venv',$(done))
+
+
 .PHONY: clean
 clean: clean-package clean-venv clean-stampdir clean-sample-code
 clean: clean-TAGS distclean clean-coverage
