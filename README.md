@@ -11,6 +11,7 @@ git clone URL
 cd sfcollapse
 pyseed=/path/python3.10.x make development
 make install-nrpy
+make setup-sfcollapse # see build
 ```
 
 ## Usage

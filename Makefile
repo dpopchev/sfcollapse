@@ -446,6 +446,40 @@ clean-nrpy:
 	@rm --force $(venv_nrpy_modules_dst)
 	@$(call log,'clean nrpy modules from venv',$(done))
 
+build_dir := build
+$(build_dir):
+	@mkdir $@
+	@$(call add_gitignore,$@)
+	@$(call log,'make $@ dir',$(done))
+
+.PHONY: setup-sfcollapse
+setup-sfcollapse: $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_headers_dst)
+
+sfcollapse_build := $(build_dir)/sfcollapse
+$(sfcollapse_build): | $(build_dir)
+	@mkdir $@
+	@$(call add_gitignore,$@)
+	@$(call log,'make $@ dir',$(done))
+
+sfcollapse_notebook := sfcollapse.ipynb
+$(sfcollapse_build)/$(sfcollapse_notebook): nrpybooks/$(sfcollapse_notebook) | $(sfcollapse_build)
+	@cp $< $@
+	@$(call log,'copy $<',$(done))
+
+sfcollapse_headers := CurviBoundaryConditions/boundary_conditions
+sfcollapse_headers += ScalarField
+sfcollapse_headers += SIMD
+sfcollapse_headers_dst := $(addprefix $(sfcollapse_build)/,$(sfcollapse_headers))
+
+$(sfcollapse_headers_dst): $(sfcollapse_build)/%: $(nrpy_modules_dir)/% | $(sfcollapse_build)
+	@mkdir -p $(dir $@)
+	@ln -s $(abspath $<) $@
+	@$(call log,'make symbolic link headers for $(notdir $<)',$(done))
+
+.PHONY: clean-sfcollapse
+clean-sfcollapse:
+	@rm -rf $(sfcollapse_build)
+	@$(call log,'clean sfcollapse build $(sfcollapse_build)',$(done))
 
 .PHONY: clean
 clean: clean-package clean-venv clean-stampdir clean-sample-code

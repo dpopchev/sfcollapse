@@ -1,3 +1,5 @@
+build
+build/sfcollapse
 .coverage
 __pycache__
 sfcollapse.egg-info
