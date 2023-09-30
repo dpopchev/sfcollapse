@@ -386,8 +386,7 @@ distclean:
 	@rm -rf $(dist_dir)
 	@$(call log,'clean up distribution package $(dist_dir)',$(done))
 
-ipython := $(venv)/ipython
-
+ipython := $(venv)/bin/ipython
 .PHONY: run-ipython ### virtual env ipython
 run-ipython: $(ipython)
 	$< --colors Linux
@@ -397,7 +396,6 @@ $(ipython):
 	@$(call log,'install ipython into virtual environment',$(done))
 
 jupyter := $(venv)/bin/jupyter
-
 .PHONY: run-jupyter ### virtual env jupyter server
 run-jupyter: $(jupyter)
 	 $< notebook
