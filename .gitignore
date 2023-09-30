@@ -1,6 +1,5 @@
 build
 build/sfcollapse
-.coverage
 .ipynb_checkpoints/
 __pycache__
 sfcollapse.egg-info
