@@ -25,7 +25,7 @@ def test_aggregator_finds_data_sources_using_pattern(
         make_aggregator, make_path_stub,
 ):
     pattern = re.compile(r'out640-(\d+).txt')
-    content = ['out640-01.txt', 'out640-02.txt', 'out640-03.txt', 'xxx.txt']
+    content = ['out640-01.txt', 'out640-02.txt', 'out640-03.txt', 'out640.txt']
     aggregator = make_aggregator(make_path_stub(content), pattern)
     assert aggregator.sources == [
         'out640-01.txt',
