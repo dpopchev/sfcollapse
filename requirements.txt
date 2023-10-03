@@ -6,3 +6,4 @@ pylint-junit
 pynvim
 pytest
 pytest-cov
+pytest-mock
