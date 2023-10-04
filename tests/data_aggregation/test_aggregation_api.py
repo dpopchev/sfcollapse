@@ -5,8 +5,8 @@ import pytest
 
 from sfcollapse.data_aggregation import DataAggregator
 
-FILE_PATTERN = re.compile(r'out640-(\d+).txt')
 PATH_CONTENT = ['out640-01.txt', 'out640-02.txt', 'out640-03.txt', 'out640.txt']
+FILE_PATTERN = re.compile(r'out640-(\d+).txt')
 
 @pytest.fixture
 def make_path_stub(mocker):
@@ -18,19 +18,11 @@ def make_path_stub(mocker):
 
     return factory
 
-def make_aggregator():
-    return DataAggregator
+@pytest.fixture
+def aggregator(make_path_stub):
+    return DataAggregator(make_path_stub(PATH_CONTENT), FILE_PATTERN)
 
-class TestAggregationProperties:
-
-    @pytest.fixture
-    def aggregator(self):
-
-
-def test_aggregator_finds_data_sources_using_pattern(
-        make_aggregator, make_path_stub,
-):
-    aggregator = make_aggregator(make_path_stub(content), pattern)
+def test_aggregator_finds_data_sources_using_pattern(aggregator):
     assert aggregator.sources == [
         'out640-01.txt',
         'out640-02.txt',
