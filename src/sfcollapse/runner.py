@@ -1,16 +1,30 @@
 """run scalar field collapse notebook"""
-
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING
 
 import nbformat
 from nbconvert.preprocessors.execute import ExecutePreprocessor
+from configparser import ConfigParser
 
-if TYPE_CHECKING:
-    from configparser import ConfigParser
+NOTEBOOK_NAME = 'sfcollapse.ipynb'
 
+def make_config(**kwargs) -> ConfigParser:
+    '''make config compatible with nrpybooks/sfcollapse.ipynb
+
+    supported values to adjust as optional arguments are: 'name' of the Run, and
+    'amplitude' of the ScalarField
+    '''
+
+    config = ConfigParser()
+    config['Run'] = {'name': kwargs.get('name', 'BSSN_ScalarFieldCollapse_Ccodes')}
+    config['ScalarField'] = {
+        'id_family': 'Gaussian_pulse',
+        'amplitude': kwargs.get('amplitude', '0.4'),
+        'center': '0',
+        'width': '1',
+    }
+    return config
 
 def mark_notebook_executed(nb_path: Path) -> Path:
     """due to the notebook mechanism preserve the cell output into .executed nb"""
