@@ -7,22 +7,15 @@ Scalar field collapse exploration tool leveraging on [nrpytutorial](https://gith
 ```
 # get nrpytutorial tagged repo
 TAG=ET_2022_11_v0; git clone --depth=1 --branch=${TAG} https://github.com/zachetienne/nrpytutorial.git "nrpytutorial-${TAG}"
-git clone URL
+git clone https://github.com/dpopchev/sfcollapse.git
 cd sfcollapse
 pyseed=/path/python3.10.x make development
 make setup-sfcollapse # see build
 ```
 
-`venv` server
-```
-make run-jupyter
-```
+Jupyter server from the venv: `make run-jupyter`
 
-
-`venv` interpreter
-```
-make run-ipython
-```
+Python interpreter from the venv: `make run-ipython`
 
 ## Usage
 
