@@ -41,15 +41,21 @@ class DataAggregator:
         )
 
     @property
-    def sources(self) -> Iterable[str]:
+    def sources(self) -> Sequence[str]:
         return sorted(p.name for p in self._get_sources().values())
 
     @property
-    def sequence(self) -> Iterable[float]:
+    def sequence(self) -> Sequence[float]:
         return sorted(s for s in self._get_sources().keys())
 
     def get_data(self, sequence: float) -> pd.DataFrame:
         return self.reader(self._get_sources()[sequence])
+
+    def get_data_chage(self, interval: Sequence[float], iloc: int = 0) -> pd.DataFrame:
+        rows = []
+        for seq in interval:
+            rows.append(self.get_data(seq).iloc[0].to_list() + [seq])
+        return pd.DataFrame(rows, columns=self.get_data(self.sequence[iloc]).columns.append(pd.Index([self.sequence_group])))
 
 def make_whitespace_reader(col_names: Sequence = tuple()) -> DataReader:
     return partial(pd.read_csv, delim_whitespace=True, names=col_names if col_names else None) # type: ignore
