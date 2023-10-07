@@ -1,17 +1,23 @@
+from __future__ import annotations
+
 from pathlib import Path
 import re
 from typing import Iterable
 
 import pytest
 
-from sfcollapse.data_aggregation import DataAggregator
+from sfcollapse.data_aggregation import DataAggregator, DataReader
 
 from random import shuffle
+
+class StubReader(DataReader):
+    def __call__(self):
+        ...
 
 class TestAggregatorApi:
     PATH_PREFIX = 'somedir'
     PATH_CONTENT = ['out640-01.txt', 'out640-02.txt', 'out640-03.txt', 'out640.txt']
-    FILE_PATTERN = re.compile(r'out640-(\d+).txt')
+    FILE_PATTERN = re.compile(r'out640-(?P<seq>\d+).txt')
 
     @pytest.fixture(autouse=True)
     def randomize_path_content_order(self):
@@ -29,7 +35,11 @@ class TestAggregatorApi:
 
     @pytest.fixture
     def aggregator(self, make_path_stub):
-        return DataAggregator(make_path_stub(self.PATH_PREFIX, self.PATH_CONTENT), self.FILE_PATTERN)
+        return DataAggregator(
+            make_path_stub(self.PATH_PREFIX, self.PATH_CONTENT),
+            self.FILE_PATTERN,
+            StubReader()
+        )
 
     def test_data_sources_are_filtered_in_path(self, aggregator):
         assert aggregator.sources == [
