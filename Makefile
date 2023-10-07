@@ -459,7 +459,12 @@ $(sfcollapse_build): | $(build_dir)
 sfcollapse_notebook := sfcollapse.ipynb
 $(sfcollapse_build)/$(sfcollapse_notebook): nrpybooks/$(sfcollapse_notebook) | $(sfcollapse_build)
 	@cp $< $@
-	@$(call log,'copy $<',$(done))
+	@$(call log,'make copy for notebook $(notdir $<)',$(done))
+
+sfcollapse_visualization:= visualization_$(sfcollapse_notebook)
+$(sfcollapse_build)/$(sfcollapse_visualization): nrpybooks/$(sfcollapse_visualization) | $(sfcollapse_build)
+	@cp $< $@
+	@$(call log,'make copy for notebook $(notdir $<)',$(done))
 
 sfcollapse_headers := CurviBoundaryConditions/boundary_conditions
 sfcollapse_headers += ScalarField
@@ -472,7 +477,7 @@ $(sfcollapse_headers_dst): $(sfcollapse_build)/%: $(nrpy_modules_dir)/% | $(sfco
 	@$(call log,'make symbolic link headers for $(notdir $<)',$(done))
 
 .PHONY: setup-sfcollapse
-setup-sfcollapse: install-nrpy $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_headers_dst)
+setup-sfcollapse: install-nrpy $(sfcollapse_build)/$(sfcollapse_notebook) $(sfcollapse_build)/$(sfcollapse_visualization) $(sfcollapse_headers_dst)
 
 .PHONY: clean-sfcollapse
 clean-sfcollapse:

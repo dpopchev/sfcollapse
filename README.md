@@ -19,6 +19,27 @@ Python interpreter from the venv: `make run-ipython`
 
 ## Usage
 
+### Scalar Field Collapse
+
+After running `make setup-sfcollapse` you will see the *untracked* directory `build/sfcollapse`
+populated with copies of `sfcollapse` notebooks from `nrpybooks`.
+
+`sfcollapse.ipynb` has reduced content of the original tutorial notebook.
+
+`visualize_sfcollapse.ipynb` has a small visualization scripts leveraging on
+they `sfcollapse` module.
+
+
+Make a quick test run by
+
+- `make run-jupyter`
+- open the suggested link from the jupyter server
+- navigate to the `visualization_sfcollapse.ipynb` in the browser
+- execute the cells in order
+
+You can find the notable examples in `sfcollapse.phenomena.NOTABLE_RUNS`; those
+are run in the aforementioned visualization notebook by default.
+
 ### General remark
 
 The `nrpy` module uses global state to communicate `C` modules being loaded and
