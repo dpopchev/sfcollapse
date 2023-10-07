@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import nbformat
 from nbconvert.preprocessors.execute import ExecutePreprocessor
 
-
-def copy_into(source: Path, destination: Path) -> None:
-    """copy file using pathlib.Path"""
-    destination.joinpath(source.name).write_text(source.read_text())
+if TYPE_CHECKING:
+    from configparser import ConfigParser
 
 
 def mark_notebook_executed(nb_path: Path) -> Path:
@@ -41,8 +40,14 @@ def sandbox_notebook(nb: Path, mark: str = 'sandbox') -> Path:
     sandboxed_nb.write_text(nb.read_text())
     return sandboxed_nb
 
+def make_notebook_config(nb: Path, config:ConfigParser) -> None:
+    with open(nb.parent.joinpath(f"{nb.stem}.ini"), 'w') as config_handler:
+        config.write(config_handler)
+
 def sandbox_run(
     notebook: Path,
+    config: ConfigParser
     ) -> None:
     """run notebook in sandbox"""
+    make_notebook_config(notebook, config)
     execute_notebook(sandbox_notebook(notebook))
