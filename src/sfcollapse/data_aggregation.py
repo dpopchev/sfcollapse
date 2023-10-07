@@ -3,9 +3,9 @@ from functools import partial
 
 import pandas as pd
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import (
-    TYPE_CHECKING, Any, Dict, Iterable, List, Match, Pattern,
+    TYPE_CHECKING, Dict, Iterable, Match, Pattern,
     Protocol, Sequence, Tuple, Union,
 )
 
