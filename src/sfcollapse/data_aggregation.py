@@ -1,13 +1,13 @@
 from __future__ import annotations
-from functools import partial
-
-import pandas as pd
 
 from dataclasses import dataclass
+from functools import partial
 from typing import (
-    TYPE_CHECKING, Dict, Iterable, Match, Pattern,
-    Protocol, Sequence, Tuple, Union,
+    TYPE_CHECKING, Dict, Iterable, Match, Pattern, Protocol,
+    Sequence, Tuple, Union,
 )
+
+import pandas as pd
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -17,9 +17,11 @@ class Stringable(Protocol):
     def __str__(self) -> str:
         ...
 
+
 class DataReader(Protocol):
     def __call__(self, _: Path) -> pd.DataFrame:
         ...
+
 
 @dataclass
 class DataAggregator:
@@ -51,14 +53,31 @@ class DataAggregator:
     def get_data(self, sequence: float) -> pd.DataFrame:
         return self.reader(self._get_sources()[sequence])
 
-    def get_data_chage(self, interval: Sequence[float], iloc: int = 0) -> pd.DataFrame:
+    def get_data_chage(
+            self,
+            interval: Sequence[float],
+            iloc: int = 0,
+    ) -> pd.DataFrame:
         rows = []
         for seq in interval:
             rows.append(self.get_data(seq).iloc[0].to_list() + [seq])
-        return pd.DataFrame(rows, columns=self.get_data(self.sequence[iloc]).columns.append(pd.Index([self.sequence_group])))
+        return pd.DataFrame(
+            rows, columns=self.get_data(
+            self.sequence[iloc],
+            ).columns.append(pd.Index([self.sequence_group])),
+        )
+
 
 def make_whitespace_reader(col_names: Sequence = tuple()) -> DataReader:
-    return partial(pd.read_csv, delim_whitespace=True, names=col_names if col_names else None) # type: ignore
+    return partial(
+        pd.read_csv,
+        delim_whitespace=True,
+        names=col_names if col_names else None,
+    )  # type: ignore
+
 
 def make_csv_reader(col_names: Sequence = tuple()) -> DataReader:
-    return partial(pd.read_csv, names=col_names if col_names else None) # type: ignore
+    return partial(
+        pd.read_csv,
+        names=col_names if col_names else None,
+    )  # type: ignore

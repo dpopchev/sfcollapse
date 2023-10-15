@@ -1,13 +1,14 @@
 """run scalar field collapse notebook"""
 from __future__ import annotations
 
+from configparser import ConfigParser
 from pathlib import Path
 
 import nbformat
 from nbconvert.preprocessors.execute import ExecutePreprocessor
-from configparser import ConfigParser
 
 NOTEBOOK_NAME = 'sfcollapse.ipynb'
+
 
 def make_config(**kwargs) -> ConfigParser:
     '''make config compatible with nrpybooks/sfcollapse.ipynb
@@ -17,7 +18,12 @@ def make_config(**kwargs) -> ConfigParser:
     '''
 
     config = ConfigParser()
-    config['Run'] = {'name': kwargs.get('name', 'BSSN_ScalarFieldCollapse_Ccodes')}
+    config['Run'] = {
+        'name': kwargs.get(
+            'name',
+            'BSSN_ScalarFieldCollapse_Ccodes',
+        ),
+    }
     config['ScalarField'] = {
         'id_family': 'Gaussian_pulse',
         'amplitude': kwargs.get('amplitude', '0.4'),
@@ -27,9 +33,10 @@ def make_config(**kwargs) -> ConfigParser:
     config['GridPoints'] = {
         'nx0': kwargs.get('nx0', '640'),
         'nx1': kwargs.get('nx1', '2'),
-        'nx2': kwargs.get('nx2', '2')
+        'nx2': kwargs.get('nx2', '2'),
     }
     return config
+
 
 def mark_notebook_executed(nb_path: Path) -> Path:
     """due to the notebook mechanism preserve the cell output into .executed nb"""
@@ -54,19 +61,22 @@ def execute_notebook(nb_path: Path) -> None:
         with open(mark_notebook_executed(nb_path), 'w', encoding='utf-8') as executed_handler:
             nbformat.write(nb_inmemory, executed_handler)
 
+
 def sandbox_notebook(nb: Path, mark: str = 'sandbox') -> Path:
     sandboxed_nb = nb.parent.joinpath(f"{mark}_{nb.name}")
     sandboxed_nb.write_text(nb.read_text())
     return sandboxed_nb
 
-def make_notebook_config(nb: Path, config:ConfigParser) -> None:
+
+def make_notebook_config(nb: Path, config: ConfigParser) -> None:
     with open(nb.parent.joinpath(f"{nb.stem}.ini"), 'w') as config_handler:
         config.write(config_handler)
 
+
 def sandbox_run(
     notebook: Path,
-    config: ConfigParser
-    ) -> None:
+    config: ConfigParser,
+) -> None:
     """run notebook in sandbox"""
     make_notebook_config(notebook, config)
     execute_notebook(sandbox_notebook(notebook))
