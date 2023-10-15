@@ -24,6 +24,11 @@ def make_config(**kwargs) -> ConfigParser:
         'center': '0',
         'width': '1',
     }
+    config['GridPoints'] = {
+        'nx0': kwargs.get('nx0', '640'),
+        'nx1': kwargs.get('nx1', '2'),
+        'nx2': kwargs.get('nx2', '2')
+    }
     return config
 
 def mark_notebook_executed(nb_path: Path) -> Path:
