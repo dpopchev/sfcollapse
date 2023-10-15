@@ -34,6 +34,7 @@ def make_config(**kwargs) -> ConfigParser:
         'nx0': kwargs.get('nx0', '640'),
         'nx1': kwargs.get('nx1', '2'),
         'nx2': kwargs.get('nx2', '2'),
+        'cfl_factor': kwargs.get('cfl_factor', '0.5'),
     }
     return config
 

@@ -23,9 +23,9 @@ NOTABLE_AMPLITUDE_RUNS = (
 )
 
 EXPLORE_RUNS = (
-    {'name': 'nx0-320', 'amplitude': '0.30340', 'nx0': '320'},
+    {'name': 'nx0-640-nxrest4', 'amplitude': '0.30340', 'nx0': '640', 'nx1': '4', 'nx2': '4'},
+    {'name': 'nx0-640-cfl_factor0.1', 'amplitude': '0.30340', 'cfl_factor': '0.1'},
     {'name': 'nx0-640', 'amplitude': '0.30340', 'nx0': '640'},
-    {'name': 'nx0-960', 'amplitude': '0.30340', 'nx0': '960'},
 )
 
 DEFAULT_RUNS = EXPLORE_RUNS
