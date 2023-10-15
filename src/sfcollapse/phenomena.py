@@ -36,16 +36,19 @@ reader = make_whitespace_reader(
     ['xx0', 'rr', 'sf', 'sfm', 'alpha', 'cf', 'log10H'],
 )
 
+RUN_ELLAPSED_THRESHOLD = 65
 
 def make_data_home(run_name: str):
     return Path(f'{run_name}/output/')
 
 
 def do_run(run, notebook=NOTEBOOK_NAME):
-    logger.info(f'Running {run["name"]} with amplitude = {run["amplitude"]}')
+    logger.info( f'Running %s with amplitude = %s',run["name"],run["amplitude"])
     start = timer()
     sandbox_run(Path(notebook), make_config(**run))
-    logger.info(f'END {run["name"]}, time ellapsed = {timer() - start:.3f}s')
+    ellapsed = timer() - start
+    log_ellapsed = logger.info if ellapsed > RUN_ELLAPSED_THRESHOLD else logger.warn
+    log_ellapsed(f'END %s, time ellapsed = %.2f', run["name"], ellapsed)
 
 
 def run(runs: Iterable[Dict] = DEFAULT_RUNS):
