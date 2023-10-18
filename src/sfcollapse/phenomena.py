@@ -28,7 +28,18 @@ EXPLORE_RUNS = (
     {'name': 'nx0-640', 'amplitude': '0.30340', 'nx0': '640'},
 )
 
-DEFAULT_RUNS = EXPLORE_RUNS
+CRITICAL_RUNS = (
+    # {'name': 'nx0-640-weak', 'amplitude': '0.29', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-strg', 'amplitude': '0.31', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-weak', 'amplitude': '0.301', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-strg', 'amplitude': '0.309', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-weak', 'amplitude': '0.302', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-strg', 'amplitude': '0.303', 'cfl_factor': '0.1'},
+    {'name': 'nx0-640-weak', 'amplitude': '0.3021', 'cfl_factor': '0.1'},
+    {'name': 'nx0-640-strg', 'amplitude': '0.3029', 'cfl_factor': '0.1'},
+)
+
+DEFAULT_RUNS = CRITICAL_RUNS
 
 PATTERN = re.compile(r'out(?:\d+)-(?P<seq>\d+).txt$')
 
