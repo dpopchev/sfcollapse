@@ -35,8 +35,14 @@ CRITICAL_RUNS = (
     # {'name': 'nx0-640-strg', 'amplitude': '0.309', 'cfl_factor': '0.1'},
     # {'name': 'nx0-640-weak', 'amplitude': '0.302', 'cfl_factor': '0.1'},
     # {'name': 'nx0-640-strg', 'amplitude': '0.303', 'cfl_factor': '0.1'},
-    {'name': 'nx0-640-weak', 'amplitude': '0.3021', 'cfl_factor': '0.1'},
-    {'name': 'nx0-640-strg', 'amplitude': '0.3029', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-weak', 'amplitude': '0.3020', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-strg', 'amplitude': '0.3023', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-weak', 'amplitude': '0.3021', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-strg', 'amplitude': '0.3022', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-weak', 'amplitude': '0.30211', 'cfl_factor': '0.1'},
+    # {'name': 'nx0-640-strg', 'amplitude': '0.30213', 'cfl_factor': '0.1'},
+    {'name': 'nx0-640-weak', 'amplitude': '0.302124', 'cfl_factor': '0.1'},
+    {'name': 'nx0-640-strg', 'amplitude': '0.302126', 'cfl_factor': '0.1'},
 )
 
 DEFAULT_RUNS = CRITICAL_RUNS
