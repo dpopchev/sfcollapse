@@ -3,7 +3,7 @@ import re
 from collections import namedtuple
 from pathlib import Path
 from timeit import default_timer as timer
-from typing import Any, Dict, Iterable
+from typing import Dict, Iterable
 
 from sfcollapse.data_aggregation import DataAggregator, make_whitespace_reader
 from sfcollapse.runner import NOTEBOOK_NAME, make_config, sandbox_run
@@ -28,21 +28,22 @@ EXPLORE_RUNS = (
     {'name': 'nx0-640', 'amplitude': '0.30340', 'nx0': '640'},
 )
 
+def make_critical_run(guess):
+    return {'name': f'guess-{guess}', 'amplitude': guess,}
+
+BEFORE_TRUNCT_CRITICAL_RUNS = (
+    make_critical_run(0.3033447265625),
+    make_critical_run(0.30334487915039066),
+)
+
+CRITICAL_NUMERRICAL_ERR_EXPLOSION_START = (
+    make_critical_run(0.3033189312827149),
+    make_critical_run(0.3033189693994141),
+)
+
 CRITICAL_RUNS = (
-    # {'name': 'nx0-640-weak', 'amplitude': '0.29', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-strg', 'amplitude': '0.31', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-weak', 'amplitude': '0.301', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-strg', 'amplitude': '0.309', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-weak', 'amplitude': '0.302', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-strg', 'amplitude': '0.303', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-weak', 'amplitude': '0.3020', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-strg', 'amplitude': '0.3023', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-weak', 'amplitude': '0.3021', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-strg', 'amplitude': '0.3022', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-weak', 'amplitude': '0.30211', 'cfl_factor': '0.1'},
-    # {'name': 'nx0-640-strg', 'amplitude': '0.30213', 'cfl_factor': '0.1'},
-    {'name': 'nx0-640-weak', 'amplitude': '0.302124', 'cfl_factor': '0.1'},
-    {'name': 'nx0-640-strg', 'amplitude': '0.302126', 'cfl_factor': '0.1'},
+    make_critical_run(0.3033189336650086),
+    make_critical_run(0.30331893485615546),
 )
 
 DEFAULT_RUNS = CRITICAL_RUNS

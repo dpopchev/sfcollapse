@@ -31,10 +31,13 @@ def make_config(**kwargs) -> ConfigParser:
         'width': '1',
     }
     config['GridPoints'] = {
-        'nx0': kwargs.get('nx0', '640'),
+        'nx0': kwargs.get('nx0', '320'),
         'nx1': kwargs.get('nx1', '2'),
         'nx2': kwargs.get('nx2', '2'),
         'cfl_factor': kwargs.get('cfl_factor', '0.5'),
+    }
+    config['CoordSystem'] = {
+        'type': kwargs.get('type', 'SinhSpherical')
     }
     return config
 
